@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Swiper Styles */
+.promotions-slider {
+  overflow: hidden;
+}
+
+.promotions-slider .swiper-pagination {
+  bottom: 20px !important;
+}
+
+.promotions-slider .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+.promotions-slider .swiper-pagination-bullet-active {
+  background: #fff;
+}
+
+.promotions-slider .swiper-button-next,
+.promotions-slider .swiper-button-prev {
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.promotions-slider .swiper-button-next:after,
+.promotions-slider .swiper-button-prev:after {
+  font-size: 16px;
+}
+
+.promotions-slider .swiper-button-next:hover,
+.promotions-slider .swiper-button-prev:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.promotions-slider .swiper-button-disabled {
+  opacity: 0;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Add touch-action for better mobile experience */
+.swiper-container {
+  touch-action: pan-y pinch-zoom;
+}

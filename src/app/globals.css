@@ -5,15 +5,28 @@
 /* Custom Swiper Styles */
 .promotions-slider {
   overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.promotions-slider .swiper {
+  width: 100%;
+}
+
+.promotions-slider .swiper-slide {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
 .promotions-slider .swiper-pagination {
-  bottom: 20px !important;
+  bottom: 25px !important;
+  z-index: 30;
 }
 
 .promotions-slider .swiper-pagination-bullet {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   background: rgba(255, 255, 255, 0.5);
   opacity: 1;
 }
@@ -25,21 +38,24 @@
 .promotions-slider .swiper-button-next,
 .promotions-slider .swiper-button-prev {
   color: white;
-  background: rgba(0, 0, 0, 0.3);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
   transition: all 0.2s ease;
+  margin: 0 4px;
 }
 
 .promotions-slider .swiper-button-next:after,
 .promotions-slider .swiper-button-prev:after {
   font-size: 16px;
+  font-weight: bold;
 }
 
 .promotions-slider .swiper-button-next:hover,
 .promotions-slider .swiper-button-prev:hover {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
 }
 
 .promotions-slider .swiper-button-disabled {
@@ -48,7 +64,35 @@
   pointer-events: none;
 }
 
+.swiper-slide-active {
+  z-index: 10;
+}
+
 /* Add touch-action for better mobile experience */
 .swiper-container {
   touch-action: pan-y pinch-zoom;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .promotions-slider .swiper-button-next,
+  .promotions-slider .swiper-button-prev {
+    width: 32px;
+    height: 32px;
+    margin: 0 2px;
+  }
+
+  .promotions-slider .swiper-pagination {
+    bottom: 15px !important;
+  }
+
+  .promotions-slider .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* Skjul Next.js feilmeldinger */
+nextjs-portal {
+  display: none !important;
 }

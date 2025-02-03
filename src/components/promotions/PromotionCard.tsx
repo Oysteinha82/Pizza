@@ -3,10 +3,22 @@
 import React from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/useTranslation";
+import { PRODUCT_PRICES } from "@/contexts/CartContext";
 import SnowEffect from "../effects/SnowEffect";
 import PartyEffect from "../effects/PartyEffect";
 import HotEffect from "../effects/HotEffect";
 import Image from "next/image";
+
+interface PromotionCardProps {
+  title: string;
+  description: string;
+  discount: number;
+  image: string;
+  price: number;
+  originalPrice: number;
+  onClick: () => void;
+  translationKey: string;
+}
 
 export default function PromotionCard({
   title,
@@ -17,22 +29,23 @@ export default function PromotionCard({
   originalPrice,
   onClick,
   translationKey,
-}) {
+}: PromotionCardProps) {
   const { language } = useLanguage();
   const { t } = useTranslation(language);
   const currency = t("productModal.currency");
 
-  // Konverterer prisene fra NOK til USD med en mer realistisk kurs (1 USD = ca. 10.5 NOK)
-  const adjustedPrice = currency === "$" ? Math.round(price / 10.5) : price;
-  const adjustedOriginalPrice =
-    currency === "$" ? Math.round(originalPrice / 10.5) : originalPrice;
+  // Hent priser fra PRODUCT_PRICES
+  const productPrices = PRODUCT_PRICES[translationKey];
+  const currentPrice = productPrices?.prices[language]?.normal || price;
+  const currentOriginalPrice =
+    productPrices?.prices[language]?.large || originalPrice;
 
   const isChristmasSpecial = translationKey === "christmas_special";
   const isTriplePizza = translationKey === "triple_pizza";
   const isQuattroSpecial = translationKey === "quattro_special";
 
   return (
-    <div className="relative group h-[500px] overflow-hidden">
+    <div className="relative group h-full overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <div className="relative w-full h-full">
@@ -43,57 +56,63 @@ export default function PromotionCard({
             className="object-cover transform scale-[1.02] group-hover:scale-110 
                     transition-all duration-700 ease-in-out"
             priority
+            sizes="(max-width: 640px) 100vw,
+                   (max-width: 1024px) 90vw,
+                   80vw"
           />
         </div>
-        {/* Enkel gradient for tekstområdet */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
         {isChristmasSpecial && <SnowEffect />}
         {isTriplePizza && <PartyEffect />}
         {isQuattroSpecial && <HotEffect />}
       </div>
 
-      {/* Discount badge */}
-      <div className="absolute top-8 left-10 z-20">
-        <div
-          className="bg-red-600 text-white px-4 py-2 rounded-full font-bold 
-                      shadow-lg transform -rotate-2 group-hover:rotate-0 transition-transform duration-300"
-        >
-          {t("promotions.saveToday").replace("{discount}", discount.toString())}
-        </div>
-      </div>
-
       {/* Content Container */}
       <div className="absolute inset-x-0 bottom-0 z-20">
-        <div className="p-10 max-w-xl">
+        <div className="p-6 sm:p-8">
           {/* Title and Description */}
-          <h3 className="text-3xl font-bold text-white mb-3">{title}</h3>
-          <p className="text-lg text-white/90 leading-relaxed mb-4 line-clamp-2">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 font-playfair">
+            {title}
+          </h3>
+          <p className="text-base sm:text-lg text-white/90 leading-relaxed mb-4 line-clamp-2 max-w-2xl">
             {description}
           </p>
 
           {/* Price Section */}
           <div className="flex items-baseline gap-3">
-            <span className="text-3xl font-bold text-[#FFD700] drop-shadow-[0_0_3px_rgba(255,215,0,0.3)]">
+            <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#FFD700] drop-shadow-[0_0_3px_rgba(255,215,0,0.3)]">
               {currency === "$" ? "$" : ""}
-              {adjustedPrice}
+              {currentPrice}
               {currency === "kr" ? " kr" : ""}
             </span>
-            <span className="text-lg text-red-400 line-through font-medium">
+            <span className="text-base sm:text-lg lg:text-xl text-red-400 line-through font-medium">
               {currency === "$" ? "$" : ""}
-              {adjustedOriginalPrice}
+              {currentOriginalPrice}
               {currency === "kr" ? " kr" : ""}
             </span>
           </div>
         </div>
       </div>
 
-      {/* Velg Button - høyre hjørne */}
-      <div className="absolute bottom-10 right-10 z-20">
+      {/* Discount badge */}
+      <div className="absolute top-6 left-6 z-20">
+        <div
+          className="bg-red-600 text-white px-4 py-2 rounded-full font-bold 
+                    shadow-lg transform -rotate-2 group-hover:rotate-0 transition-transform duration-300
+                    text-sm sm:text-base"
+        >
+          {t("promotions.saveToday").replace("{discount}", discount.toString())}
+        </div>
+      </div>
+
+      {/* Velg Button */}
+      <div className="absolute bottom-6 right-6 z-20">
         <button
           onClick={onClick}
-          className="bg-red-600 hover:bg-red-500 text-white px-8 py-3 rounded-full 
-                        text-lg font-medium transition-all duration-300 flex items-center gap-2
-                        hover:gap-3 shadow-lg hover:shadow-xl"
+          className="bg-red-600 hover:bg-red-500 text-white px-6 py-2 rounded-full 
+                    text-base sm:text-lg font-medium transition-all duration-300 flex items-center gap-2
+                    hover:gap-3 shadow-lg hover:shadow-xl transform hover:scale-105"
         >
           {t("productModal.select")}
           <svg

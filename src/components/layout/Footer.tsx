@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { useTranslation, Language } from "@/hooks/useTranslation";
 
-export default function Footer() {
+interface FooterProps {
+  onLegalClick: () => void;
+}
+
+export default function Footer({ onLegalClick }: FooterProps) {
   const { t } = useTranslation("en");
 
   const socialLinks = [
@@ -60,18 +64,18 @@ export default function Footer() {
 
           {/* Legal Links */}
           <div className="flex space-x-6">
-            <Link
-              href="/terms"
+            <button
+              onClick={onLegalClick}
               className="text-sm text-gray-500 hover:text-gray-600 transition-colors"
             >
               {t("footer.legal.terms")}
-            </Link>
-            <Link
-              href="/privacy"
+            </button>
+            <button
+              onClick={onLegalClick}
               className="text-sm text-gray-500 hover:text-gray-600 transition-colors"
             >
               {t("footer.legal.privacy")}
-            </Link>
+            </button>
           </div>
         </div>
 

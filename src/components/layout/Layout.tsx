@@ -45,6 +45,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <LoginModal
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
+        onRegisterClick={() => {
+          setIsLoginModalOpen(false);
+          setIsRegisterModalOpen(true);
+        }}
       />
       <RegisterModal
         isOpen={isRegisterModalOpen}

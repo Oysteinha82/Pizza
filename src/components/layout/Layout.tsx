@@ -53,6 +53,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <RegisterModal
         isOpen={isRegisterModalOpen}
         onClose={() => setIsRegisterModalOpen(false)}
+        onLoginClick={() => {
+          setIsRegisterModalOpen(false);
+          setIsLoginModalOpen(true);
+        }}
       />
       <CartModal
         isOpen={isCartModalOpen}

@@ -401,7 +401,7 @@ export default function WelcomeModal({ isOpen, onClose }: WelcomeModalProps) {
                       variants={item}
                       className="text-center space-y-3 flex-1"
                     >
-                      <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg">
+                      <h1 className="text-4xl sm:text-5xl font-bold text-white">
                         Welcome
                       </h1>
                     </MotionDiv>
@@ -442,9 +442,8 @@ export default function WelcomeModal({ isOpen, onClose }: WelcomeModalProps) {
                             x2="100%"
                             y2="0%"
                           >
-                            <stop offset="0%" stopColor="#3B82F6" />
-                            <stop offset="50%" stopColor="#A855F7" />
-                            <stop offset="100%" stopColor="#EC4899" />
+                            <stop offset="0%" stopColor="#4B5563" />
+                            <stop offset="100%" stopColor="#374151" />
                           </linearGradient>
                         </defs>
                       </svg>
@@ -457,8 +456,8 @@ export default function WelcomeModal({ isOpen, onClose }: WelcomeModalProps) {
                   </div>
 
                   <MotionDiv key="info-notice" variants={item}>
-                    <div className="relative bg-gradient-to-br from-emerald-500/10 via-emerald-500/5 to-emerald-400/10 border border-emerald-500/20 rounded-lg p-3 backdrop-blur-sm overflow-hidden group">
-                      <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 group-hover:translate-x-full duration-1000 transition-transform ease-in-out" />
+                    <div className="relative bg-gradient-to-br from-blue-500/10 via-blue-500/5 to-blue-400/10 border border-emerald-500/20 rounded-lg p-3 backdrop-blur-sm overflow-hidden group">
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-blue-500/0 group-hover:translate-x-full duration-1000 transition-transform ease-in-out" />
                       <div className="flex items-start gap-2.5">
                         <div className="bg-emerald-500/10 rounded-lg p-2 backdrop-blur-sm border border-emerald-500/20">
                           <svg
@@ -476,10 +475,10 @@ export default function WelcomeModal({ isOpen, onClose }: WelcomeModalProps) {
                           </svg>
                         </div>
                         <div className="space-y-1 flex-1">
-                          <h4 className="text-emerald-300 font-medium text-sm">
+                          <h4 className="text-blue-300 font-medium text-sm">
                             Important Notice
                           </h4>
-                          <p className="text-emerald-300/90 text-xs leading-relaxed">
+                          <p className="text-blue-300/90 text-xs leading-relaxed">
                             This is a demonstration website. All products,
                             prices, and features are for demonstration purposes
                             only. No actual orders will be processed, and no
@@ -527,49 +526,49 @@ export default function WelcomeModal({ isOpen, onClose }: WelcomeModalProps) {
                             icon: featureIcons.responsive,
                             title: "Responsive Design",
                             desc: "Adaptive layout",
-                            color: "blue",
-                            bg: "bg-gradient-to-br from-blue-500/5 to-blue-400/10",
-                            border: "border-blue-500/20",
+                            color: "gray",
+                            bg: "bg-gradient-to-br from-gray-500/5 to-gray-400/10",
+                            border: "border-gray-500/20",
                             iconBg:
-                              "bg-gradient-to-br from-blue-500/10 to-blue-400/20",
+                              "bg-gradient-to-br from-gray-500/10 to-gray-400/20",
                             hover:
-                              "hover:border-blue-400/40 hover:shadow-blue-500/20 hover:from-blue-500/10 hover:to-blue-400/20",
+                              "hover:border-gray-400/40 hover:shadow-[0_0_20px_rgba(75,85,99,0.3)] hover:from-gray-500/10 hover:to-gray-400/20",
                           },
                           {
                             icon: featureIcons.cart,
                             title: "Shopping Cart",
                             desc: "Real-time updates",
-                            color: "purple",
-                            bg: "bg-gradient-to-br from-purple-500/5 to-purple-400/10",
-                            border: "border-purple-500/20",
+                            color: "gray",
+                            bg: "bg-gradient-to-br from-gray-500/5 to-gray-400/10",
+                            border: "border-gray-500/20",
                             iconBg:
-                              "bg-gradient-to-br from-purple-500/10 to-purple-400/20",
+                              "bg-gradient-to-br from-gray-500/10 to-gray-400/20",
                             hover:
-                              "hover:border-purple-400/40 hover:shadow-purple-500/20 hover:from-purple-500/10 hover:to-purple-400/20",
+                              "hover:border-gray-400/40 hover:shadow-[0_0_20px_rgba(75,85,99,0.3)] hover:from-gray-500/10 hover:to-gray-400/20",
                           },
                           {
                             icon: featureIcons.profile,
                             title: "User Profiles",
                             desc: "Account management",
-                            color: "teal",
-                            bg: "bg-gradient-to-br from-teal-500/5 to-teal-400/10",
-                            border: "border-teal-500/20",
+                            color: "gray",
+                            bg: "bg-gradient-to-br from-gray-500/5 to-gray-400/10",
+                            border: "border-gray-500/20",
                             iconBg:
-                              "bg-gradient-to-br from-teal-500/10 to-teal-400/20",
+                              "bg-gradient-to-br from-gray-500/10 to-gray-400/20",
                             hover:
-                              "hover:border-teal-400/40 hover:shadow-teal-500/20 hover:from-teal-500/10 hover:to-teal-400/20",
+                              "hover:border-gray-400/40 hover:shadow-[0_0_20px_rgba(75,85,99,0.3)] hover:from-gray-500/10 hover:to-gray-400/20",
                           },
                           {
                             icon: featureIcons.language,
                             title: "Multi-language",
                             desc: "NO/EN support",
-                            color: "pink",
-                            bg: "bg-gradient-to-br from-pink-500/5 to-pink-400/10",
-                            border: "border-pink-500/20",
+                            color: "gray",
+                            bg: "bg-gradient-to-br from-gray-500/5 to-gray-400/10",
+                            border: "border-gray-500/20",
                             iconBg:
-                              "bg-gradient-to-br from-pink-500/10 to-pink-400/20",
+                              "bg-gradient-to-br from-gray-500/10 to-gray-400/20",
                             hover:
-                              "hover:border-pink-400/40 hover:shadow-pink-500/20 hover:from-pink-500/10 hover:to-pink-400/20",
+                              "hover:border-gray-400/40 hover:shadow-[0_0_20px_rgba(75,85,99,0.3)] hover:from-gray-500/10 hover:to-gray-400/20",
                           },
                         ].map((feature, index) => (
                           <MotionDiv
@@ -594,11 +593,11 @@ export default function WelcomeModal({ isOpen, onClose }: WelcomeModalProps) {
                                 className={`${
                                   feature.color === "blue"
                                     ? "text-blue-400"
-                                    : feature.color === "purple"
-                                    ? "text-purple-400"
-                                    : feature.color === "teal"
-                                    ? "text-teal-400"
-                                    : "text-pink-400"
+                                    : feature.color === "violet"
+                                    ? "text-violet-400"
+                                    : feature.color === "sky"
+                                    ? "text-sky-400"
+                                    : "text-indigo-400"
                                 } transition-transform duration-300 group-hover:scale-110`}
                               >
                                 {feature.icon}
@@ -630,9 +629,19 @@ export default function WelcomeModal({ isOpen, onClose }: WelcomeModalProps) {
                 <MotionDiv key="close-button" variants={item} className="mt-6">
                   <button
                     onClick={onClose}
-                    className="w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white px-4 py-3 rounded-xl 
-                             hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 transition-all duration-300 
-                             flex items-center justify-center gap-2 text-sm font-medium group"
+                    className="w-full bg-gradient-to-r from-gray-700 to-gray-800 text-white px-4 py-3 rounded-xl 
+                             hover:from-gray-600 hover:to-gray-700 
+                             transition-all duration-300 
+                             flex items-center justify-center gap-2 text-sm font-medium group
+                             border border-gray-700/50 hover:border-gray-500
+                             shadow-[0_0_15px_rgba(0,0,0,0.2)] 
+                             hover:shadow-[0_0_25px_rgba(75,85,99,0.4)]
+                             relative overflow-hidden
+                             before:absolute before:inset-0 
+                             before:bg-gradient-to-r before:from-gray-500/0 before:via-gray-500/10 before:to-gray-500/0
+                             before:translate-x-[-100%] hover:before:translate-x-[100%]
+                             before:transition-transform before:duration-700
+                             before:ease-out"
                   >
                     <span>Start Exploring</span>
                     <svg

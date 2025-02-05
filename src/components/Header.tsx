@@ -62,6 +62,7 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
 
   const menuRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const mainMenuRef = useRef<HTMLDivElement>(null);
   const locationRef = useRef<HTMLDivElement>(null);
   const languageRef = useRef<HTMLDivElement>(null);
 
@@ -72,6 +73,12 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsMenuOpen(false);
+      }
+      if (
+        mainMenuRef.current &&
+        !mainMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
       }
       if (
         dropdownRef.current &&
@@ -238,16 +245,18 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <div className="relative" ref={dropdownRef}>
+          <nav className="hidden menu:flex items-center space-x-8">
+            <div className="relative" ref={mainMenuRef}>
               {/* Desktop Menu Button */}
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center text-gray-700 hover:text-red-600 transition-colors group"
+                className="flex items-center text-gray-700 hover:text-red-600 transition-all duration-200 group bg-gray-50/80 px-3 py-1.5 rounded-lg hover:bg-gray-100/80 hover:shadow-sm"
               >
-                <span className="font-medium">{t("header.menu")}</span>
+                <span className="font-medium tracking-wide">
+                  {t("header.menu")}
+                </span>
                 <motion.svg
-                  className="ml-1 w-4 h-4"
+                  className="ml-1.5 w-3.5 h-3.5 text-gray-500 group-hover:text-red-500"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -272,7 +281,7 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
                     exit={{ opacity: 0, y: -10, scale: 0.95 }}
                     transition={{ duration: 0.2 }}
                     style={{ background: "rgba(255, 255, 255, 0.98)" }}
-                    className="absolute left-0 mt-2 w-56 rounded-xl shadow-xl py-2 border border-gray-100/50 backdrop-blur-sm overflow-hidden"
+                    className="absolute left-0 -ml-2 mt-2 w-64 rounded-xl shadow-lg py-2 border border-gray-100/50 backdrop-blur-sm overflow-hidden"
                   >
                     {menuItems.map((item, index) => (
                       <motion.div
@@ -298,17 +307,26 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
                         >
                           <div className="absolute inset-0 bg-red-50 opacity-0 group-hover:opacity-100 transition-opacity duration-100" />
                           <motion.span
-                            className="relative flex items-center justify-center w-8 h-8 mr-3 rounded-lg bg-gradient-to-br from-red-50 to-orange-50 shadow-sm transition-all duration-100 border border-red-100/30"
+                            className="relative flex items-center justify-center w-8 h-8 mr-3 rounded-lg bg-gradient-to-br from-red-50 to-orange-50 shadow-sm transition-all duration-200 border border-red-100/30 group-hover:from-red-100 group-hover:to-orange-100"
                             whileHover={{ scale: 1.05 }}
                           >
-                            <span className="text-xl relative z-10">
+                            <span className="text-lg relative z-10">
                               {item.emoji}
                             </span>
                             <div className="absolute inset-0 bg-gradient-to-t from-red-100/20 to-transparent opacity-60 rounded-lg" />
                           </motion.span>
-                          <span className="font-medium relative text-gray-700 group-hover:text-red-600 transition-colors duration-100">
-                            {t(item.label)}
-                          </span>
+                          <div className="flex flex-col items-start relative z-10">
+                            <span className="font-medium text-gray-700 group-hover:text-red-600 transition-colors duration-100">
+                              {t(item.label)}
+                            </span>
+                            <span className="text-[11px] text-gray-500 mt-0.5 group-hover:text-gray-600 transition-colors duration-100">
+                              {t(
+                                `header.menuItems.${
+                                  item.href.split("#")[1]
+                                }.description`
+                              )}
+                            </span>
+                          </div>
                         </motion.button>
                       </motion.div>
                     ))}
@@ -318,10 +336,10 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
             </div>
 
             {/* Desktop Location & Contact */}
-            <div className="flex items-center space-x-8">
+            <div className="flex items-center space-x-6">
               <div className="flex flex-col items-end">
-                <div className="flex items-center text-gray-700">
-                  <span className="w-4 h-4 mr-1 text-red-500">
+                <div className="flex items-center text-gray-700 mb-0.5">
+                  <span className="w-3.5 h-3.5 mr-1 text-red-500">
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
@@ -333,11 +351,11 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
                       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                     </svg>
                   </span>
-                  <span className="text-sm font-medium">
+                  <span className="text-xs font-medium tracking-wide">
                     {currentLocation.phone}
                   </span>
                 </div>
-                <div className="text-xs text-gray-500">
+                <div className="text-[11px] text-gray-500 tracking-wide">
                   {t(`header.openHours.${currentLocation.key || "oslo"}`)}
                 </div>
               </div>
@@ -346,9 +364,9 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
               <div className="relative" ref={locationRef}>
                 <button
                   onClick={() => setIsLocationOpen(!isLocationOpen)}
-                  className="flex items-center text-gray-700 hover:text-red-600 transition-colors group"
+                  className="flex items-center text-gray-700 hover:text-red-600 transition-all duration-200 group bg-gray-50/80 px-3 py-1.5 rounded-lg hover:bg-gray-100/80 hover:shadow-sm"
                 >
-                  <span className="w-5 h-5 mr-2 text-red-500">
+                  <span className="w-4 h-4 mr-2 text-red-500">
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
@@ -361,9 +379,11 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
                       <circle cx="12" cy="10" r="3" />
                     </svg>
                   </span>
-                  <span className="font-medium">{currentLocation.name}</span>
+                  <span className="text-sm font-medium tracking-wide">
+                    {currentLocation.name}
+                  </span>
                   <motion.svg
-                    className="ml-1 w-4 h-4"
+                    className="ml-1.5 w-3.5 h-3.5 text-gray-500 group-hover:text-red-500"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -387,7 +407,7 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
                       exit={{ opacity: 0, y: -10, scale: 0.95 }}
                       transition={{ duration: 0.2 }}
                       style={{ background: "rgba(255, 255, 255, 0.98)" }}
-                      className="absolute left-0 mt-2 w-56 rounded-xl shadow-xl py-2 border border-gray-100/50 backdrop-blur-sm overflow-hidden"
+                      className="absolute left-0 mt-2 w-64 rounded-xl shadow-lg py-2 border border-gray-100/50 backdrop-blur-sm overflow-hidden"
                     >
                       {locations.map((location, index) => (
                         <motion.div
@@ -414,7 +434,7 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
                           >
                             <div className="absolute inset-0 bg-red-50 opacity-0 group-hover:opacity-100 transition-opacity duration-100" />
                             <motion.span
-                              className="relative flex items-center justify-center w-6 h-6 mr-3 rounded-lg bg-gradient-to-br from-red-50 to-orange-50 shadow-sm transition-all duration-100 border border-red-100/30"
+                              className="relative flex items-center justify-center w-6 h-6 mr-3 rounded-lg bg-gradient-to-br from-red-50 to-orange-50 shadow-sm transition-all duration-200 border border-red-100/30 group-hover:from-red-100 group-hover:to-orange-100"
                               whileHover={{ scale: 1.05 }}
                             >
                               <span className="text-base relative z-10">
@@ -422,9 +442,14 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
                               </span>
                               <div className="absolute inset-0 bg-gradient-to-t from-red-100/20 to-transparent opacity-60 rounded-lg" />
                             </motion.span>
-                            <span className="font-medium relative text-gray-700 group-hover:text-red-600 transition-colors duration-100">
-                              {location.name}
-                            </span>
+                            <div className="flex flex-col items-start relative z-10">
+                              <span className="font-medium text-gray-700 group-hover:text-red-600 transition-colors duration-100">
+                                {location.name}
+                              </span>
+                              <span className="text-[11px] text-gray-500 mt-0.5 group-hover:text-gray-600 transition-colors duration-100">
+                                {location.address}
+                              </span>
+                            </div>
                           </motion.button>
                         </motion.div>
                       ))}
@@ -705,7 +730,7 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
             {/* Mobile Menu Button - Always visible on mobile */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-red-600 transition-colors md:hidden"
+              className="text-gray-700 hover:text-red-600 transition-colors menu:hidden"
             >
               <svg
                 className="w-6 h-6"
@@ -732,7 +757,7 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden bg-white border-t border-gray-100 max-h-[calc(100vh-64px)] overflow-y-auto"
+            className="menu:hidden bg-white border-t border-gray-100 max-h-[calc(100vh-64px)] overflow-y-auto"
           >
             {/* Contact Info */}
             <div className="px-4 py-3 border-b border-gray-100">
@@ -816,7 +841,14 @@ export default function Header({ onLoginClick, onCartClick }: HeaderProps) {
                         className="flex items-center w-full px-7 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
                       >
                         <span className="text-base mr-2">📍</span>
-                        {location.name}
+                        <div className="flex flex-col items-start relative z-10">
+                          <span className="font-medium text-gray-700 group-hover:text-red-600 transition-colors duration-100">
+                            {location.name}
+                          </span>
+                          <span className="text-[11px] text-gray-500 mt-0.5 group-hover:text-gray-600 transition-colors duration-100">
+                            {location.address}
+                          </span>
+                        </div>
                       </button>
                     ))}
                   </motion.div>

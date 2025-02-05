@@ -47,7 +47,7 @@ const dips = [
       "Tarragon",
       "Shallots",
     ],
-    image: "/bearnaise.webp",
+    image: "/bernaise.jpeg",
     type: "dip" as ProductType,
   },
   {

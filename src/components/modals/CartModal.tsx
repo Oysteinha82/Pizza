@@ -309,11 +309,29 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
                                             ? item.options.drinkSize
                                             : item.type === "pizza"
                                             ? item.options?.size === "large"
-                                              ? '18" (45cm)'
-                                              : '12" (30cm)'
+                                              ? t("productModal.size.largeName")
+                                              : t(
+                                                  "productModal.size.normalName"
+                                                )
+                                            : item.type === "pasta"
+                                            ? item.options?.size === "large"
+                                              ? t(
+                                                  "productModal.size.largePastaName"
+                                                )
+                                              : t(
+                                                  "productModal.size.normalPastaName"
+                                                )
+                                            : item.type === "salad"
+                                            ? item.options?.size === "large"
+                                              ? t(
+                                                  "productModal.size.largeSaladName"
+                                                )
+                                              : t(
+                                                  "productModal.size.normalSaladName"
+                                                )
                                             : item.options?.size === "large"
-                                            ? "Stor"
-                                            : "Normal"}
+                                            ? t("productModal.size.largeName")
+                                            : t("productModal.size.normalName")}
                                         </span>
                                       </div>
                                     )}

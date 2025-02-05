@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        menu: "850px",
+      },
       fontFamily: {
         sans: ["var(--font-inter)"],
         display: ["var(--font-playfair)"],

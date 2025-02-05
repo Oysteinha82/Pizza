@@ -51,7 +51,7 @@ const pastas = [
       "Parmesan",
       "Olive Oil",
     ],
-    image: "/pesto.webp",
+    image: "/PestoPasta.jpg",
     type: "pasta" as ProductType,
   },
 ];
